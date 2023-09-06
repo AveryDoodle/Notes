@@ -7,8 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+// comma starts adding protocal
+class ViewController: UIViewController, UITextFieldDelegate {
     
+    var test = 7
     
     @IBOutlet weak var labelOutlet: UILabel!
     
@@ -22,11 +24,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // attaching delegate to text field
+        textFieldOutput.delegate = self
+        
+        textFieldOutlet.delegate = self
     }
     
     
     
     @IBAction func submitAction(_ sender: UIButton) {
+        // making the keyboard dissapear
+        textFieldOutlet.resignFirstResponder()
+        textFieldOutput.resignFirstResponder()
         var name = textFieldOutput.text!
         var age = Int(textFieldOutlet.text!)
         if let a = age{
@@ -38,6 +48,11 @@ class ViewController: UIViewController {
             
         }
         
+    }
+    // funtion is called when the return key on the software keyboard is hit
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true;
     }
     
 }
